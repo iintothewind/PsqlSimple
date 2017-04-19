@@ -1,0 +1,79 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/jdbc
+        http://www.springframework.org/schema/jdbc/spring-jdbc.xsd" default-lazy-init="true">
+  <context:component-scan base-package="predix.psql.api" use-default-filters="false">
+    <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+  </context:component-scan>
+  <mvc:annotation-driven/>
+  <mvc:default-servlet-handler/>
+  <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor"/>
+  <bean id="exceptionHandlerExceptionResolver" class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver"/>
+
+  <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+    <property name="url" value="#{cloudCfg.jdbcUrl}"/>
+    <property name="username" value="#{cloudCfg.jdbcUserName}"/>
+    <property name="password" value="#{cloudCfg.jdbcPassword}"/>
+    <property name="initialSize" value="1"/>
+    <property name="minIdle" value="1"/>
+    <property name="maxActive" value="50"/>
+    <!--<property name="maxWait" value="60000"/>-->
+    <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+    <property name="minEvictableIdleTimeMillis" value="300000"/>
+    <property name="validationQuery" value="SELECT 'x'"/>
+    <property name="testWhileIdle" value="true"/>
+    <property name="testOnBorrow" value="false"/>
+    <property name="testOnReturn" value="false"/>
+    <property name="removeAbandoned" value="true"/>
+    <property name="removeAbandonedTimeout" value="10"/>
+    <property name="logAbandoned" value="true"/>
+    <property name="poolPreparedStatements" value="true"/>
+    <property name="maxPoolPreparedStatementPerConnectionSize" value="5000"/>
+    <property name="proxyFilters">
+      <list>
+        <ref bean="statFilter"/>
+        <ref bean="wallFilter"/>
+        <ref bean="slf4jLogFilter"/>
+      </list>
+    </property>
+  </bean>
+
+  <bean id="cloudCfg" class="predix.psql.config.CloudCfg"/>
+  <bean id="connectionProvider" class="com.github.davidmoten.rx.jdbc.ConnectionProviderFromDataSource" destroy-method="close">
+    <constructor-arg ref="dataSource"/>
+  </bean>
+
+
+  <bean id="statFilter" class="com.alibaba.druid.filter.stat.StatFilter">
+    <property name="logSlowSql" value="true"/>
+    <property name="slowSqlMillis" value="5000"/>
+    <property name="mergeSql" value="true"/>
+  </bean>
+
+  <bean id="wallFilter" class="com.alibaba.druid.wall.WallFilter">
+    <property name="dbType" value="postgresql"/>
+    <property name="logViolation" value="true"/>
+    <property name="throwException" value="false"/>
+  </bean>
+
+  <bean id="slf4jLogFilter" class="com.alibaba.druid.filter.logging.Slf4jLogFilter">
+    <property name="statementExecutableSqlLogEnable" value="true"/>
+    <property name="connectionLogErrorEnabled" value="true"/>
+    <property name="statementLogErrorEnabled" value="true"/>
+    <property name="resultSetLogErrorEnabled" value="true"/>
+  </bean>
+
+  <jdbc:initialize-database data-source="dataSource" ignore-failures="DROPS">
+    <jdbc:script location="classpath:h2/init.sql"/>
+  </jdbc:initialize-database>
+</beans>
