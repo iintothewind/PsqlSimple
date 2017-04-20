@@ -16,8 +16,8 @@ mvn jetty:run
 
 ## run on predix
 - open manifest.yml 
-- change application name `psqlsimple` to your own name
-- change application bind service `pg-perf` to your own postgresql service
+- change application name `psqlsimple` to your own name (optional)
+- create postgres service instance, here the name can be `pg-perf` or replace with your own instance name
 - then execute
 
 ```
@@ -53,6 +53,6 @@ http://localhost:8080/psql/h2/login.jsp
 - Settings: `Generic H2 (Embedded)`
 - Driver Class: `org.h2.Driver`
 - JDBC URL: `jdbc:h2:mem:psqldb;MVCC=TRUE;DB_CLOSE_DELAY=-1;MODE=POSTGRESQL`
-- username: postgres
-- password: root
+- username: `postgres`
+- password: `root`
 

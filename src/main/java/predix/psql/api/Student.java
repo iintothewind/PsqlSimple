@@ -39,8 +39,7 @@ public class Student {
         .parameter("id", id)
         .getAs(Integer.class, String.class)
         .map(t -> ImmutableMap.of("id", t._1(), "name", t._2()))
-        .toBlocking().single())
-      .map(r -> ResponseEntity.ok(ImmutableMap.of("student", (Object) r)))
+        .toBlocking().single()).map(r -> ResponseEntity.ok(ImmutableMap.of("student", (Object) r)))
       .getOrElse(ResponseEntity.notFound().build());
   }
 
@@ -50,7 +49,8 @@ public class Student {
       db.select("select id, name from student")
         .getAs(Integer.class, String.class)
         .map(t -> ImmutableMap.of("id", t._1(), "name", t._2()))
-        .toBlocking().toIterable()).getOrElse(ImmutableList.of())));
+        .toBlocking().toIterable())
+      .getOrElse(ImmutableList.of())));
 
   }
 
