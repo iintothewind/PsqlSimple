@@ -3,11 +3,13 @@ package predix.psql.model;
 import com.google.common.base.MoreObjects;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class Student {
   @Min(1)
   private Integer id;
+  @NotNull
   @Size(min = 1, max = 20)
   private String name;
 
