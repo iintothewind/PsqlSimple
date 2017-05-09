@@ -29,13 +29,35 @@ cf push
 - GET /student/{id}
 
 ```
-https://psqlsimple.run.aws-jp01-pr.ice.predix.io/student/1
+GET https://psqlsimple.run.aws-jp01-pr.ice.predix.io/student/1
+Content-Type: application/json
+Response Body:
+{
+  "student": {
+    "id": 1,
+    "name": "Hello"
+  }
+}
 ```
 
 - GET /student/all
 
 ```
-https://psqlsimple.run.aws-jp01-pr.ice.predix.io/student/all
+GET https://psqlsimple.run.aws-jp01-pr.ice.predix.io/student/all
+Content-Type: application/json
+Response Body:
+{
+  "students": [
+    {
+      "id": 1,
+      "name": "Hello"
+    },
+    {
+      "id": 2,
+      "name": "World"
+    }
+  ]
+}
 ```
 
 - POST /student
