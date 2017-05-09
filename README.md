@@ -60,7 +60,7 @@ Status: 200
 - PUT /student/3
 
 ```
-POST https://psqlsimple.run.aws-jp01-pr.ice.predix.io/student/3
+PUT https://psqlsimple.run.aws-jp01-pr.ice.predix.io/student/3
 Content-Type: application/json
 Request Body:
 {
