@@ -26,16 +26,64 @@ cf push
 ```
 
 ## api implemented
-- /student/{id}
+- GET /student/{id}
 
 ```
 https://psqlsimple.run.aws-jp01-pr.ice.predix.io/student/1
 ```
 
-- /student/all
+- GET /student/all
 
 ```
 https://psqlsimple.run.aws-jp01-pr.ice.predix.io/student/all
+```
+
+- POST /student
+
+```
+POST https://psqlsimple.run.aws-jp01-pr.ice.predix.io/student
+Content-Type: application/json
+Request Body:
+{
+  "name": "test"
+}
+
+Response:
+Status: 200
+{
+  "created": {
+    "id": 12
+  }
+}
+```
+
+- PUT /student/3
+
+```
+POST https://psqlsimple.run.aws-jp01-pr.ice.predix.io/student/3
+Content-Type: application/json
+Request Body:
+{
+  "id": 3,
+  "name": "222"
+}
+
+Response: 
+# if /student/3 is non-existing:
+Status: 200
+{
+  "created": {
+    "id": 3
+  }
+}
+
+# if /student/3 is existing:
+Status: 200
+{
+  "updated": {
+    "id": 3
+  }
+}
 ```
 
 ## druid monitor
