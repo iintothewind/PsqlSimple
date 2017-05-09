@@ -83,6 +83,7 @@ public class StudentApi {
         .parameter("id", v._1)
         .count()
         .toBlocking().single())
+        .filter(i -> i == 1)
         .map(r -> ResponseEntity.ok(new ImmutableMap.Builder<String, Object>().put("updated", ImmutableMap.of("id", v._1)).build()))
         .getOrElse(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build())),
       Case($(t -> Option.of(t._2.getId()).isDefined() && t._1.equals(t._2.getId())), v -> Try.of(() -> db.update("insert into student(id, name) values (:id, :name)")
