@@ -122,7 +122,7 @@ http://localhost:8080/psql/h2/login.jsp
 ```
 - Settings: `Generic H2 (Embedded)`
 - Driver Class: `org.h2.Driver`
-- JDBC URL: `jdbc:h2:mem:psqldb;MVCC=TRUE;DB_CLOSE_DELAY=-1;MODE=POSTGRESQL`
+- JDBC URL: `jdbc:h2:mem:test;MVCC=TRUE;DB_CLOSE_DELAY=-1;MODE=POSTGRESQL`
 - username: `postgres`
 - password: `root`
 
