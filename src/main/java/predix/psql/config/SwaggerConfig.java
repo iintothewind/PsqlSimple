@@ -1,4 +1,4 @@
-package predix.psql.cfg;
+package predix.psql.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

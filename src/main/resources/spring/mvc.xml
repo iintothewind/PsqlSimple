@@ -74,7 +74,7 @@
     <property name="resultSetLogErrorEnabled" value="true"/>
   </bean>
 
-  <bean class="predix.psql.cfg.SwaggerConfig"/>
+  <bean class="predix.psql.config.SwaggerConfig"/>
 
   <jdbc:initialize-database data-source="dataSource" ignore-failures="DROPS">
     <jdbc:script location="classpath:h2/init.sql"/>
