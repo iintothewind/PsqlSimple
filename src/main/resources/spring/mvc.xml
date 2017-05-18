@@ -16,6 +16,7 @@
     <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
   </context:component-scan>
   <mvc:annotation-driven/>
+  <context:annotation-config/>
   <mvc:default-servlet-handler/>
   <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor"/>
   <bean id="exceptionHandlerExceptionResolver" class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver"/>
@@ -72,6 +73,8 @@
     <property name="statementLogErrorEnabled" value="true"/>
     <property name="resultSetLogErrorEnabled" value="true"/>
   </bean>
+
+  <bean class="predix.psql.cfg.SwaggerConfig"/>
 
   <jdbc:initialize-database data-source="dataSource" ignore-failures="DROPS">
     <jdbc:script location="classpath:h2/init.sql"/>
