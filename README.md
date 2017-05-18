@@ -25,7 +25,11 @@ mvn clean package
 cf push
 ```
 
-## api implemented
+## api documentation
+- link
+
+[https://psqlsimple.run.aws-jp01-pr.ice.predix.io/swagger-ui.html](https://psqlsimple.run.aws-jp01-pr.ice.predix.io/swagger-ui.html)
+
 - GET /student/{id}
 
 ```
