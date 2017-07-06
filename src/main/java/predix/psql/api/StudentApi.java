@@ -69,7 +69,7 @@ public class StudentApi {
       .returnGeneratedKeys()
       .getAs(Integer.class)
       .toBlocking().single())
-      .map(v -> ResponseEntity.ok(new ImmutableMap.Builder<String, Object>().put("created", ImmutableMap.of("id", v)).build()))
+      .map(v -> ResponseEntity.status(HttpStatus.CREATED).body(new ImmutableMap.Builder<String, Object>().put("created", ImmutableMap.of("id", v)).build()))
       .getOrElse(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
   }
 
@@ -84,7 +84,7 @@ public class StudentApi {
         .count()
         .toBlocking().single())
         .filter(i -> i == 1)
-        .map(r -> ResponseEntity.ok(new ImmutableMap.Builder<String, Object>().put("updated", ImmutableMap.of("id", v._1)).build()))
+        .map(r -> ResponseEntity.status(HttpStatus.ACCEPTED).body(new ImmutableMap.Builder<String, Object>().put("updated", ImmutableMap.of("id", v._1)).build()))
         .getOrElse(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build())),
       Case($(t -> Option.of(t._2.getId()).isDefined() && t._1.equals(t._2.getId())), v -> Try.of(() -> db.update("insert into student(id, name) values (:id, :name)")
         .parameter("id", v._2.getId())
@@ -92,7 +92,7 @@ public class StudentApi {
         .returnGeneratedKeys()
         .getAs(Integer.class)
         .toBlocking().single())
-        .map(k -> ResponseEntity.ok(new ImmutableMap.Builder<String, Object>().put("created", ImmutableMap.of("id", k)).build()))
+        .map(k -> ResponseEntity.status(HttpStatus.CREATED).body(new ImmutableMap.Builder<String, Object>().put("created", ImmutableMap.of("id", k)).build()))
         .getOrElse(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build())),
       Case($(), t -> ResponseEntity.badRequest().body(new ImmutableMap.Builder<String, Object>().put("error", "bad request").build()))
     );
