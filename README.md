@@ -28,12 +28,12 @@ cf push
 ## api documentation
 - link
 
-[https://psqlsimple.run.aws-jp01-pr.ice.predix.io/swagger-ui.html](https://psqlsimple.run.aws-jp01-pr.ice.predix.io/swagger-ui.html)
+[https://psqlsimple.run.aws-eu-central-1-pr.ice.predix.io/swagger-ui.html](https://psqlsimple.run.aws-eu-central-1-pr.ice.predix.io/swagger-ui.html)
 
 - GET /student/{id}
 
 ```
-GET https://psqlsimple.run.aws-jp01-pr.ice.predix.io/student/1
+GET https://psqlsimple.run.aws-eu-central-1-pr.ice.predix.io/student/1
 Content-Type: application/json
 Response Body:
 {
@@ -47,7 +47,7 @@ Response Body:
 - GET /student/all
 
 ```
-GET https://psqlsimple.run.aws-jp01-pr.ice.predix.io/student/all
+GET https://psqlsimple.run.aws-eu-central-1-pr.ice.predix.io/student/all
 Content-Type: application/json
 Response Body:
 {
@@ -67,7 +67,7 @@ Response Body:
 - POST /student
 
 ```
-POST https://psqlsimple.run.aws-jp01-pr.ice.predix.io/student
+POST https://psqlsimple.run.aws-eu-central-1-pr.ice.predix.io/student
 Content-Type: application/json
 Request Body:
 {
@@ -86,7 +86,7 @@ Status: 200
 - PUT /student/3
 
 ```
-PUT https://psqlsimple.run.aws-jp01-pr.ice.predix.io/student/3
+PUT https://psqlsimple.run.aws-eu-central-1-pr.ice.predix.io/student/3
 Content-Type: application/json
 Request Body:
 {
@@ -117,7 +117,7 @@ Status: 200
 - password : `druid`
 
 ```
-https://psqlsimple.run.aws-jp01-pr.ice.predix.io/druid/login.html
+https://psqlsimple.run.aws-eu-central-1-pr.ice.predix.io/druid/login.html
 ```
 
 ## h2 console for local environment

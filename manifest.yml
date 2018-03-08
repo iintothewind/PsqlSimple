@@ -4,11 +4,10 @@ memory: 512M
 disk_quota: 256M
 buildpack: java-buildpack
 path: ./target/simple-0.1.war
-random-route: true
 
 applications:
 - name: psqlsimple
   env:
     JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'
-  services:
-  - pg-perf
+#  services:
+#  - pg-perf
